@@ -7,11 +7,11 @@ X = [patterns; ones(1, ndata)];
 
 
 % Create initial weight matrix
-W  = randn(outsize, insize+1);
+W  = randn(outsize, insize+1) .* .001;
 
 eta = 0.001; % step length
 
-num_epoches = 100;
+num_epoches = 20;
 
 
 axis ([-2, 2, -2, 2], 'square');
