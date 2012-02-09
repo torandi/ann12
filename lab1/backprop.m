@@ -6,11 +6,9 @@
 [insize, ndata] = size(patterns);
 [outsize, ndata] = size(targets);
 
-
-
 % Create initial weight matrix
-W  = randn(hidden_size, insize+1) .* .001;
-V  = randn(outsize, hidden_size+1) .* .001;
+W  = randn(hidden_size, insize+1) .* 2/sqrt(insize) - 1/sqrt(insize);
+V  = randn(outsize, hidden_size+1) .* 2/sqrt(insize) - 1/sqrt(insize);
 
 eta = 0.1; % step length
 alpha = 0.9; % keep factor

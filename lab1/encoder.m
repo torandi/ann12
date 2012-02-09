@@ -1,6 +1,8 @@
 patterns = eye(8)*2-1;
 targets = patterns;
 
+hidden_size = 3;
+
 % For a perfect result the weights was:
 % W = 
 % -6.4243e-03  -8.1006e-03  -8.6598e-03  -9.1573e-03  -3.7077e-03  -4.4409e-03  -7.5810e-03  -7.5909e-03   9.7780e-03

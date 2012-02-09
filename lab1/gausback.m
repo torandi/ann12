@@ -1,9 +1,14 @@
 %hidden_size = 100; % set this in console
 %num_epoches = 20; % set in console
 
+% större layer size => bättre resultat, men längre tid till convergens
+
 x=[-5:1:5]';
 y=x;
 z=exp(-x.*x*0.1) * exp(-y.*y*0.1)' - 0.5;
+
+mesh(x,y,z);
+sleep(1);
 
 gridsize = size(x, 1);
 ndata = gridsize*gridsize;
@@ -19,11 +24,11 @@ patterns = [reshape(xx, 1, ndata); reshape(yy, 1, ndata)];
 
 
 % Create initial weight matrix
-W  = randn(hidden_size, insize+1) .* .001;
-V  = randn(outsize, hidden_size+1) .* .001;
+W  = randn(hidden_size, insize+1) .* 2/sqrt(insize) - 1/sqrt(insize);
+V  = randn(outsize, hidden_size+1) .* 2/sqrt(insize) - 1/sqrt(insize);
 
-eta = 0.1; % step length
-alpha = 0.9; % keep factor
+eta = 0.05; % step length
+alpha = 0.90; % keep factor
 
 dw = 0;
 dv = 0;
@@ -47,8 +52,6 @@ for epoch=1:num_epoches
 	% Update weights
 	dw = (dw .* alpha) - (delta_h * X') .* (1-alpha);
 	dv = (dv .* alpha) - (delta_o * hout') .* (1-alpha);
-	%dw = -eta .* delta_h * X';
-	%dv = -eta .* delta_o * hout';
 	W += dw .* eta;
 	V += dv .* eta;
 
