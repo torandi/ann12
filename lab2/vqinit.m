@@ -26,7 +26,7 @@ h=figure();
 %ploterase(pd);
 figure(h);
 clf;
-% global border,dmin,dmax,xmin,xmax,pointsize,pd;
+%global xmin,xmax, ymin, ymax;
 %plotdata(pd,data,p1,p2);
 %data=read('cluster');
 plotdata2(h, data);
@@ -35,6 +35,7 @@ ylim([1 7]);
 
 global m;
 [m var]=initrbf(units,cols(data),dmin,dmax);
+axis([xmin xmax ymin ymax]);
 plotrbf2(h,m,var,p1,p2);
 %plotrefresh(pd);
 

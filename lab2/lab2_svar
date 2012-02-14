@@ -35,4 +35,10 @@
 
 5.1
  * Only the nodes closest (the winners) to the dataclusters moved at all. This makes some nodes totaly irrelevant (they will never trigger)
- * You get only one node at each cluster
+ * You get one and only one node at each cluster (given that number of clusters < number of nodes)
+
+--
+ * with single winner one or more nodes tend to get large or very of. With all units allowed to move they spread out quite good over the data clusters, but run to long they often don't cover all data points.
+
+ !!!! EM WAS BROKEN (wrong axes)
+ * I don't have time

@@ -47,6 +47,7 @@ etha=etha/sum(etha);
 %ploterase(pd);
 clf;
 plotdata2(h,data);
+axis([xmin xmax ymin ymax]);
 plotrbf2(h,m,var,p1,p2);
 %plotlines(pd,m,oldm,p1,p2);
 %plotrefresh(pd);
