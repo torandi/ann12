@@ -1,7 +1,7 @@
 % Input:
 % units = number of units
 
-x = [0:0.1:2*pi];
+x = [0:0.1:2*pi]';
 f = sin(2*x);
 
 makerbf

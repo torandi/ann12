@@ -25,3 +25,14 @@
  for units = 5 we get res=0. 
 
  * One can solve XOR with RBF by putting one node at each 0-point (that is, at (0, 0) and (1, 1)). This will make the output from the rbf linary separable.
+
+4.2
+ n = 0.1
+ * I found that varing the numebr of iterations from 2000 to 7000 didn't to very much, the big difference was in units. 
+	 units = 10 gives an acceptable result  max(res) ~=0.42. 20 => 0.1
+	 To get down to 0.01 i changed n to 0.3 and use 12000 iterations and 50 units, and i still was only close (0.03)
+* x^2: Worked well, it had problems with fitting correct at the endpoint
+
+5.1
+ * Only the nodes closest (the winners) to the dataclusters moved at all. This makes some nodes totaly irrelevant (they will never trigger)
+ * You get only one node at each cluster
