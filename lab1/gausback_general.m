@@ -1,5 +1,6 @@
 %hidden_size = 100; % set this in console
 %num_epoches = 20; % set in console
+%n
 
 % större layer size => bättre resultat, men längre tid till convergens
 
@@ -20,10 +21,12 @@ permute = randperm(size(patterns,2));
 patterns = patterns(:, permute);
 targets = targets(:, permute);
 
-% Fetch sizes
-[insize, ndata] = size(patterns);
-[outsize, ndata] = size(targets);
+sub_patterns = patterns(:, [1:1:n]);
+sub_targets = targets(:, [1:1:n]);
 
+% Fetch sizes
+[insize, ndata] = size(sub_patterns);
+[outsize, ndata] = size(sub_targets);
 
 
 
@@ -37,11 +40,11 @@ alpha = 0.90; % keep factor
 dw = 0;
 dv = 0;
 
-X = [patterns ; ones(1, ndata)];
+X = [sub_patterns ; ones(1, ndata)];
 
 for epoch=1:num_epoches
 
-	% forward pass
+	% frist forward pass
 	hin = W * X;
 	hout = [ 2 ./ (1+exp(-hin)) - 1 ; ones(1, ndata)];
 
@@ -49,7 +52,7 @@ for epoch=1:num_epoches
 	out = 2 ./ (1+exp(-oin)) - 1;
 
 	% backwards pass
-	delta_o = (out - targets) .* ((1 + out) .* (1 - out)) * 0.5;
+	delta_o = (out - sub_targets) .* ((1 + out) .* (1 - out)) * 0.5;
 	delta_h = (V' * delta_o) .* ((1 + hout) .* (1 - hout)) * 0.5;
 	delta_h = delta_h(1:hidden_size, :); 
 
@@ -59,8 +62,14 @@ for epoch=1:num_epoches
 	W += dw .* eta;
 	V += dv .* eta;
 
-	ordered_out = out(:, inv_perm);
+	% second forward pass
+	hin = W * [patterns; ones(1, size(patterns, 2))];
+	hout = [ 2 ./ (1+exp(-hin)) - 1 ; ones(1, size(patterns,2))];
 
+	% render
+	oin = V * hout;
+	out = 2 ./ (1+exp(-oin)) - 1;
+	ordered_out = out(:, inv_perm);
 	zz = reshape(ordered_out, gridsize, gridsize);
 	mesh(x,y,zz);
 	axis([-5 5 -5 5 -0.7 0.7]);
